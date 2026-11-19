@@ -37,7 +37,7 @@
   if (hero) requestAnimationFrame(function () { requestAnimationFrame(function () { hero.classList.add('ready'); }); });
 
   // Reveal on scroll
-  var els = document.querySelectorAll('.rv, .tool');
+  var els = document.querySelectorAll('.rv, .tool, .motto-quote');
   if (!('IntersectionObserver' in window) || reduce) {
     els.forEach(function (el) { el.classList.add('in'); });
   } else {
