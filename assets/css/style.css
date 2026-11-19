@@ -1035,3 +1035,51 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .motto{padding-top:clamp(64px,8vw,110px)}
 @media (max-width:700px){.motto-quote .sign-img{height:80px;margin-top:4px}}
 @media (prefers-reduced-motion:reduce){.js .motto-quote .sign-img{clip-path:none}}
+
+/* =========================================================
+   Motto story v2 — taped note, doodle, speech bubble, marker
+   ========================================================= */
+.motto-story{grid-template-columns:.55fr 1.45fr;transform:rotate(-.6deg);background:
+  linear-gradient(#fff,#fff) padding-box;border-radius:22px}
+.motto-story::before{display:none}
+.motto-story .tape{position:absolute;top:-13px;width:96px;height:28px;background:rgba(42,41,255,.13);border-left:1px dashed rgba(42,41,255,.18);border-right:1px dashed rgba(42,41,255,.18);backdrop-filter:blur(1px)}
+.motto-story .t1{left:28px;transform:rotate(-8deg)}
+.motto-story .t2{right:28px;transform:rotate(7deg)}
+.ms-side{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.ms-side .bulb{width:clamp(90px,10vw,124px);height:auto;margin-left:6px;transform:rotate(-8deg)}
+.ms-side .bulb path{fill:none;stroke:var(--blue);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.ms-side .bulb .ray{stroke:var(--lime);stroke-width:4}
+.ms-body p{color:var(--ink-2)}
+.ms-body > p:first-child::first-letter{float:left;font-family:"Caveat",cursive;font-weight:700;font-size:3.4em;line-height:.8;margin:.08em .1em 0 0;color:var(--blue)}
+.bubble{position:relative;margin:24px 0 26px;display:inline-block;max-width:100%}
+.bubble blockquote{margin:0;padding:18px 24px 16px;font-family:"Caveat",cursive;font-weight:700;font-size:clamp(28px,3vw,38px);line-height:1.15;color:var(--ink);background:#f6f6ff;
+  border:2.5px solid var(--ink);border-radius:255px 18px 225px 18px/18px 225px 18px 255px}
+.bubble blockquote .smile{display:inline-block;width:.9em;height:.9em;vertical-align:-.12em;margin-left:.1em}
+.bubble blockquote .smile path{fill:none;stroke:var(--blue);stroke-width:4.5;stroke-linecap:round}
+.bubble .tail{position:absolute;left:44px;bottom:-24px;width:34px;height:26px;overflow:visible}
+.bubble .tail path{fill:#f6f6ff;stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.bubble figcaption{margin:30px 0 0 86px;font-family:"Caveat",cursive;font-weight:600;font-size:22px;color:var(--muted);transform:rotate(-2deg)}
+.ms-body mark.hl{color:var(--ink);font-weight:500;padding:0 .1em;background:linear-gradient(100deg,rgba(158,243,74,0) .4em,rgba(158,243,74,.75) .9em,rgba(158,243,74,.55) 92%,rgba(158,243,74,0)) no-repeat 0 72%/0% 62%;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size 1.4s cubic-bezier(.6,.05,.3,1) .9s}
+.motto-story.in mark.hl,.no-js .ms-body mark.hl{background-size:100% 62%}
+.js .ms-side .bulb path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.2s cubic-bezier(.65,0,.35,1)}
+.js .motto-story.in .ms-side .bulb path{stroke-dashoffset:0}
+.js .motto-story.in .ms-side .bulb path:nth-child(2){transition-delay:.5s}
+.js .motto-story.in .ms-side .bulb path:nth-child(3){transition-delay:.8s}
+.js .motto-story.in .ms-side .bulb .ray{transition-delay:1.2s}
+.js .bubble{opacity:0;transform:scale(.92) rotate(-2deg);transform-origin:20% 100%;transition:opacity .5s ease .35s,transform .7s cubic-bezier(.34,1.56,.64,1) .35s}
+.js .motto-story.in .bubble{opacity:1;transform:rotate(-1deg)}
+.js .motto-story.in .bubble .smile path{stroke-dashoffset:0;transition-delay:1.1s}
+@media (max-width:700px){
+  .motto-story{grid-template-columns:1fr;transform:none}
+  .ms-side{flex-direction:row;align-items:center;justify-content:space-between}
+  .ms-side .bulb{width:70px}
+  .bubble figcaption{margin-left:70px}
+}
+@media (prefers-reduced-motion:reduce){.js .ms-side .bulb path{stroke-dashoffset:0}.js .bubble{opacity:1;transform:none}.ms-body mark.hl{background-size:100% 62%}}
+.bubble blockquote{position:relative}
+.bubble blockquote .tail{position:absolute;left:40px;top:100%;margin-top:-3px;width:34px;height:26px;bottom:auto}
+.bubble > .tail{display:none}
+.bubble figcaption{margin:26px 0 0 84px}
+.ms-body > p:first-child::first-letter{float:none;font:inherit;margin:0;color:inherit;line-height:inherit}
+.ms-body mark.hl{padding:0 .08em;background:linear-gradient(rgba(158,243,74,.72),rgba(158,243,74,.72)) no-repeat 0 78%/0% 56%;border-radius:3px}
+.motto-story.in mark.hl{background-size:100% 56%}
