@@ -1130,3 +1130,13 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .tool b{font-size:14.5px}
 .tool small{font-size:12px}
 .tool .pct{padding:3px 8px;font-size:11px}
+
+/* Services — compact */
+.svc-grid{gap:12px}
+.svc{min-height:0;padding:22px;border-radius:20px}
+.svc .ic{width:42px;height:42px;border-radius:12px}
+.svc .ic svg{width:19px;height:19px}
+.svc .num{top:22px;right:22px;font-size:12.5px}
+.svc h3{padding-top:30px;font-size:clamp(20px,1.7vw,23px)}
+.svc p{margin-top:8px;font-size:14px;line-height:1.55}
+@media (max-width:700px){.svc{min-height:0}}
