@@ -1146,3 +1146,7 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .svc .num{display:none}
 .svc h3{padding-top:0;margin:0}
 .svc p{grid-column:1/-1;margin-top:16px}
+/* Services — 6 cards, 3 + 3 */
+.svc:nth-child(4),.svc:nth-child(5){grid-column:span 2}
+@media (max-width:1000px){.svc-grid .svc,.svc-grid .svc:nth-child(5){grid-column:span 1}}
+@media (max-width:700px){.svc-grid{grid-template-columns:1fr}}
