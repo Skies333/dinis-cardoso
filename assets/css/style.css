@@ -899,3 +899,15 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .cv-avail b{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;font-size:15px;text-align:right}
 .cv-avail .dot{width:8px;height:8px;border-radius:50%;background:var(--lime);animation:ping 2.2s infinite}
 .cv-avail b{white-space:nowrap}
+
+/* ---------- Timeline: dots sit on top of the line ---------- */
+.tl::before,.tl::after{z-index:0}
+.tl-y,.tl-end{position:relative;z-index:1}
+.tl-y{opacity:1}
+.tl-y span{opacity:calc(1 - var(--i) * .18);transition:font-size .45s var(--ease),color .3s,opacity .3s}
+.tl-y.on span,.tl-y:hover span{opacity:1}
+.tl-y i{background:#cfcfcf;box-shadow:0 0 0 3px #fff}
+.tl-y.past i{background:#9d9cff;opacity:1}
+.tl-y.on i{background:var(--blue);box-shadow:0 0 0 3px #fff,0 0 0 5px rgba(42,41,255,.18)}
+.tl-end{opacity:1}
+.tl-end i{background:#e4e4e4;box-shadow:0 0 0 3px #fff}
