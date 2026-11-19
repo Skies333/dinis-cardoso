@@ -1085,3 +1085,38 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .motto-story.in mark.hl{background-size:100% 56%}
 .motto-quote .sign-img{height:clamp(64px,6.6vw,98px);margin:-.15em .2em 0 0;transform:rotate(12deg)}
 @media (max-width:700px){.motto-quote .sign-img{height:58px}}
+
+/* =========================================================
+   Motto story v3 — three beats
+   ========================================================= */
+.motto-intro{max-width:620px;margin:clamp(40px,5vw,64px) auto 0;font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:var(--muted)}
+.beats{display:grid;grid-template-columns:1fr 56px 1.15fr 56px 1fr;align-items:center;gap:0;max-width:1100px;margin:clamp(32px,4vw,52px) auto 0;text-align:left}
+.beat{position:relative;display:flex;flex-direction:column;height:100%;padding:26px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:0 1px 2px rgba(0,0,0,.04),0 18px 40px -28px rgba(20,20,60,.3)}
+.beat-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:auto;padding-bottom:28px}
+.beat .ic{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--soft);color:var(--ink)}
+.beat .ic svg{width:21px;height:21px}
+.beat .no{font-family:var(--display);font-weight:600;font-size:14px;color:var(--muted-2)}
+.beat h3{font-size:22px;margin-bottom:8px}
+.beat p{font-size:15px;line-height:1.6;color:var(--muted)}
+.beat-key{background:var(--blue);border-color:var(--blue);color:#fff;transform:translateY(-10px);box-shadow:0 26px 50px -24px rgba(42,41,255,.65)}
+.beat-key .ic{background:rgba(255,255,255,.16);color:#fff}
+.beat-key .no{color:rgba(255,255,255,.65)}
+.beat-key p{color:rgba(255,255,255,.8)}
+.beat-key blockquote{margin:14px 0 0;font-family:"Caveat",cursive;font-weight:700;font-size:clamp(28px,2.6vw,36px);line-height:1.12;color:#fff}
+.beat-key .smile{display:inline-block;width:.85em;height:.85em;vertical-align:-.1em;margin-left:.15em}
+.beat-key .smile path{fill:none;stroke:var(--lime);stroke-width:5;stroke-linecap:round}
+.tl-arrow{width:52px;height:26px;justify-self:center;overflow:visible}
+.tl-arrow path{fill:none;stroke:var(--blue);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.js .tl-arrow path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .8s cubic-bezier(.65,0,.35,1) .5s}
+.js .beats.in .tl-arrow path{stroke-dashoffset:0}
+.js .beats.in .tl-arrow:last-of-type path{transition-delay:.8s}
+.js .beat-key .smile path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .7s ease 1s}
+.js .beat-key.in .smile path{stroke-dashoffset:0}
+@media (max-width:1000px){
+  .beats{grid-template-columns:1fr;max-width:560px;gap:6px}
+  .beat-key{transform:none}
+  .tl-arrow{transform:rotate(90deg);margin:6px 0}
+}
+@media (prefers-reduced-motion:reduce){.js .tl-arrow path,.js .beat-key .smile path{stroke-dashoffset:0}}
+.beat{height:auto}
+.beat-top{margin-bottom:22px;padding-bottom:0}
