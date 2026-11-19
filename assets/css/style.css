@@ -1027,3 +1027,11 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
   .motto-story{grid-template-columns:1fr}
 }
 .motto-quote .l2 .q{margin-left:-.02em}
+
+/* ---------- Motto: real signature ---------- */
+.motto-quote .sign-img{align-self:flex-end;width:auto;height:clamp(90px,10vw,150px);margin:-.25em -.2em 0 0;transform:rotate(-6deg)}
+.js .motto-quote .sign-img{clip-path:inset(0 100% 0 0);transition:clip-path 1.6s cubic-bezier(.6,.05,.3,1);transition-delay:3.9s}
+.js .motto-quote.in .sign-img{clip-path:inset(-10% -10% -10% 0)}
+.motto{padding-top:clamp(64px,8vw,110px)}
+@media (max-width:700px){.motto-quote .sign-img{height:80px;margin-top:4px}}
+@media (prefers-reduced-motion:reduce){.js .motto-quote .sign-img{clip-path:none}}
