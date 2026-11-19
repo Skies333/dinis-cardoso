@@ -308,6 +308,20 @@
     });
   }
 
+  // About card: crossfade through photos
+  var apS = document.querySelectorAll('.about-photo .ap-slide'), apD = document.querySelectorAll('.about-photo .ap-dots i');
+  if (apS.length > 1) {
+    var apI = 0, apVis = true;
+    var apCard = document.querySelector('.about-photo');
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { apVis = es[0].isIntersecting; }).observe(apCard);
+    setInterval(function () {
+      if (!apVis || document.hidden) return;
+      apS[apI].classList.remove('on'); if (apD[apI]) apD[apI].classList.remove('on');
+      apI = (apI + 1) % apS.length;
+      apS[apI].classList.add('on'); if (apD[apI]) apD[apI].classList.add('on');
+    }, 3800);
+  }
+
   var y = document.querySelector('[data-year]');
   if (y) y.textContent = new Date().getFullYear();
 })();

@@ -965,3 +965,12 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 @keyframes burst{0%{opacity:0;transform:scale(.3)}25%{opacity:1;transform:scale(1.15)}45%{transform:scale(.95)}70%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1) translateY(-30px)}}
 @media (max-width:1000px){.story-wrap{position:relative;top:0}.story{max-width:360px}}
 @media (prefers-reduced-motion:reduce){.st-slide,.st-slide.on{transform:none;transition:opacity .2s}.story{transform:none}}
+
+/* ---------- About card: photo crossfade ---------- */
+.about-photo .ap-slides{position:absolute;inset:0}
+.about-photo .ap-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--x,50%) 30%;opacity:0;transition:opacity 1.2s ease}
+.about-photo .ap-slide.on{opacity:1}
+.about-photo .ap-dots{position:absolute;top:18px;left:0;right:0;z-index:2;display:flex;justify-content:center;gap:6px}
+.about-photo .ap-dots i{width:6px;height:6px;border-radius:999px;background:rgba(255,255,255,.55);transition:width .5s var(--ease),background .5s}
+.about-photo .ap-dots i.on{width:22px;background:#fff}
+.about-photo .over{z-index:1}
