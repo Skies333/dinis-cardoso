@@ -231,6 +231,83 @@
     place();
   }
 
+  // Instagram-style story carousel (About)
+  var story = document.querySelector('.story');
+  if (story) {
+    var slides = Array.prototype.slice.call(story.querySelectorAll('.st-slide'));
+    var bars = Array.prototype.slice.call(story.querySelectorAll('.st-bars i'));
+    var DUR = 5000, idx = 0, elapsed = 0, last = 0, playing = false, holds = 0, inView = false, rafId = null;
+    var reduceM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var render = function () {
+      slides.forEach(function (s, k) { s.classList.toggle('on', k === idx); });
+      bars.forEach(function (b, k) {
+        b.classList.toggle('done', k < idx);
+        b.firstChild.style.transform = k < idx ? 'scaleX(1)' : (k > idx ? 'scaleX(0)' : 'scaleX(' + Math.min(1, elapsed / DUR) + ')');
+      });
+      // warm up the next image
+      var nx = slides[(idx + 1) % slides.length]; if (nx && nx.loading === 'lazy') nx.loading = 'eager';
+    };
+    var go = function (k) { idx = (k + slides.length) % slides.length; elapsed = 0; render(); };
+    var tick = function (t) {
+      rafId = null;
+      var active = playing && holds === 0 && inView && !document.hidden;
+      if (active) { elapsed += Math.min(100, t - last); if (elapsed >= DUR) go(idx + 1); else bars[idx].firstChild.style.transform = 'scaleX(' + (elapsed / DUR) + ')'; }
+      last = t;
+      story.classList.toggle('paused', playing && (holds > 0) && inView);
+      rafId = requestAnimationFrame(tick);
+    };
+    var start = function () { if (!rafId) { last = performance.now(); rafId = requestAnimationFrame(tick); } };
+    playing = !reduceM;
+    render();
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { es.forEach(function (e) { inView = e.isIntersecting; }); }, { threshold: 0.35 }).observe(story);
+    } else { inView = true; }
+    start();
+    // tap left/right; hold to pause
+    var downAt = 0, moved = false;
+    story.querySelector('.st-prev').addEventListener('click', function () { if (Date.now() - downAt < 350) go(idx - 1); });
+    story.querySelector('.st-next').addEventListener('click', function () { if (Date.now() - downAt < 350) go(idx + 1); });
+    story.querySelectorAll('.st-tap').forEach(function (z) {
+      z.addEventListener('pointerdown', function () { downAt = Date.now(); holds++; });
+      ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (ev) { z.addEventListener(ev, function () { holds = Math.max(0, holds - 1); }); });
+      z.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    });
+    // pause while hovering with a mouse
+    if (window.matchMedia('(hover: hover)').matches) {
+      story.addEventListener('mouseenter', function () { holds++; });
+      story.addEventListener('mouseleave', function () { holds = 0; });
+    }
+    story.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { go(idx + 1); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { go(idx - 1); e.preventDefault(); }
+      if (e.key === ' ') { playing = !playing; e.preventDefault(); }
+    });
+    // like + heart burst (also on double-tap)
+    var likeBtn = story.querySelector('.st-like');
+    var burst = function (x, y) {
+      var h = document.createElement('span'); h.className = 'st-burst';
+      h.innerHTML = likeBtn.innerHTML; h.style.left = x + 'px'; h.style.top = y + 'px';
+      story.appendChild(h); setTimeout(function () { h.remove(); }, 950);
+    };
+    likeBtn.addEventListener('click', function () {
+      var on = !likeBtn.classList.contains('liked');
+      likeBtn.classList.toggle('liked', on); likeBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (on) burst(story.clientWidth / 2, story.clientHeight / 2);
+    });
+    var lastTap = 0;
+    story.querySelectorAll('.st-tap').forEach(function (z) {
+      z.addEventListener('pointerup', function (e) {
+        var now = Date.now();
+        if (now - lastTap < 300) {
+          var r = story.getBoundingClientRect();
+          likeBtn.classList.add('liked'); likeBtn.setAttribute('aria-pressed', 'true');
+          burst(e.clientX - r.left, e.clientY - r.top);
+        }
+        lastTap = now;
+      });
+    });
+  }
+
   var y = document.querySelector('[data-year]');
   if (y) y.textContent = new Date().getFullYear();
 })();

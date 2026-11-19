@@ -919,3 +919,49 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .cv-stats strong{display:block;font-family:var(--display);font-weight:600;font-size:15px;line-height:1.25}
 .cv-stats small{display:block;font-size:13px;color:var(--muted)}
 .cv-stats .n{font-size:34px;min-width:48px}.cv-stats li{gap:12px}.cv-stats strong{white-space:nowrap}.cv-stats span{min-width:0}
+
+/* =========================================================
+   About — Instagram-style story carousel
+   ========================================================= */
+.story-wrap{position:sticky;top:96px;display:flex;justify-content:center;padding:18px 0 30px}
+.story-wrap::before{content:"";position:absolute;inset:6% 4% 2%;border-radius:40px;background:radial-gradient(60% 50% at 30% 30%,rgba(42,41,255,.28),transparent 70%),radial-gradient(55% 45% at 75% 75%,rgba(158,243,74,.22),transparent 70%);filter:blur(30px);z-index:0}
+.story{position:relative;z-index:1;width:100%;max-width:400px;aspect-ratio:9/16;border-radius:30px;overflow:hidden;background:#0d0d0f;isolation:isolate;outline:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+  box-shadow:0 0 0 1px rgba(255,255,255,.06) inset,0 30px 60px -24px rgba(20,20,60,.55),0 12px 24px -12px rgba(0,0,0,.35);transform:rotate(-1.2deg);transition:transform .7s var(--ease)}
+.story:hover,.story:focus-visible{transform:rotate(0)}
+.story:focus-visible{box-shadow:0 0 0 3px var(--blue),0 30px 60px -24px rgba(20,20,60,.55)}
+.st-slides{position:absolute;inset:0}
+.st-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--x,50%) 50%;opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 6s linear}
+.st-slide.on{opacity:1;transform:scale(1.14)}
+.story::before,.story::after{content:"";position:absolute;left:0;right:0;z-index:2;pointer-events:none}
+.story::before{top:0;height:24%;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent)}
+.story::after{bottom:0;height:22%;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent)}
+.st-bars{position:absolute;top:12px;left:12px;right:12px;z-index:4;display:flex;gap:4px}
+.st-bars i{flex:1;height:2.5px;border-radius:3px;background:rgba(255,255,255,.35);overflow:hidden}
+.st-bars b{display:block;height:100%;width:100%;background:#fff;transform-origin:left;transform:scaleX(0)}
+.st-bars i.done b{transform:scaleX(1)}
+.st-head{position:absolute;top:26px;left:12px;right:12px;z-index:4;display:flex;align-items:center;gap:10px;color:#fff}
+.st-ring{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;padding:2px;background:conic-gradient(from 200deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#feda75)}
+.st-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2px solid #0d0d0f}
+.st-who{display:flex;flex-direction:column;line-height:1.15;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.st-who b{font-family:var(--display);font-weight:600;font-size:14px}
+.st-who small{font-size:12px;opacity:.85}
+.st-state{margin-left:auto;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transform:scale(.8);transition:opacity .25s,transform .25s}
+.st-state svg{width:14px;height:14px}
+.story.paused .st-state{opacity:1;transform:none}
+.st-tap{position:absolute;top:14%;bottom:16%;z-index:3;width:40%;border:0;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.st-prev{left:0;cursor:w-resize}.st-next{right:0;width:60%;cursor:e-resize}
+.st-foot{position:absolute;left:12px;right:12px;bottom:14px;z-index:4;display:flex;align-items:center;gap:10px}
+.st-reply{flex:1;min-width:0;height:44px;display:flex;align-items:center;padding:0 18px;border-radius:999px;border:1.5px solid rgba(255,255,255,.75);color:#fff;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(0,0,0,.08);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .25s,border-color .25s}
+.st-reply:hover{background:rgba(255,255,255,.14);border-color:#fff}
+.st-like,.st-send{flex:none;display:grid;place-items:center;width:40px;height:44px;border:0;background:none;color:#fff;cursor:pointer;padding:0}
+.st-like svg,.st-send svg{width:26px;height:26px;stroke-width:1.7;transition:transform .3s var(--ease)}
+.st-send svg{width:24px;height:24px;transform:rotate(12deg)}
+.st-like:hover svg,.st-send:hover svg{transform:scale(1.12)}
+.st-send:hover svg{transform:rotate(12deg) scale(1.12)}
+.st-like.liked svg{fill:#ff3040;stroke:#ff3040;animation:likePop .45s cubic-bezier(.34,1.8,.64,1)}
+@keyframes likePop{0%{transform:scale(.6)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
+.st-burst{position:absolute;z-index:5;width:90px;height:90px;margin:-45px 0 0 -45px;pointer-events:none;color:#fff;animation:burst .9s ease forwards}
+.st-burst svg{width:100%;height:100%;fill:#fff;stroke:none;filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
+@keyframes burst{0%{opacity:0;transform:scale(.3)}25%{opacity:1;transform:scale(1.15)}45%{transform:scale(.95)}70%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1) translateY(-30px)}}
+@media (max-width:1000px){.story-wrap{position:relative;top:0}.story{max-width:360px}}
+@media (prefers-reduced-motion:reduce){.st-slide,.st-slide.on{transform:none;transition:opacity .2s}.story{transform:none}}
