@@ -891,3 +891,11 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
   .nav a.home{padding:0 10px}
 }
 @media (max-width:380px){.nav a,.nav a.cta{padding:0 8px;font-size:12.5px}}
+
+/* ---------- CV: availability card ---------- */
+.cv-avail li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.cv-avail li:first-child{border-top:0;padding-top:2px}
+.cv-avail .k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cv-avail b{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;font-size:15px;text-align:right}
+.cv-avail .dot{width:8px;height:8px;border-radius:50%;background:var(--lime);animation:ping 2.2s infinite}
+.cv-avail b{white-space:nowrap}
