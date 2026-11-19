@@ -42,6 +42,20 @@
     });
   }, { threshold: 0.4 });
   document.querySelectorAll('.tool').forEach(function (t) { cio.observe(t); });
+  // count-up for the CV numbers
+  var nio = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return; nio.unobserve(e.target);
+      var el = e.target, to = parseInt(el.getAttribute('data-n'), 10) || 0, t0 = null;
+      (function step(t) {
+        if (!t0) t0 = t;
+        var p = Math.min(1, (t - t0) / 1100), v = Math.round(to * (1 - Math.pow(1 - p, 3)));
+        el.textContent = (v < 10 ? '0' : '') + v;
+        if (p < 1) raf(step);
+      })(performance.now());
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.cv-stats .n').forEach(function (n) { n.textContent = '00'; nio.observe(n); });
 
   // ---- Scroll-to-top button ---------------------------------------------
   var tt = document.createElement('button');

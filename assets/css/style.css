@@ -911,3 +911,11 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .tl-y.on i{background:var(--blue);box-shadow:0 0 0 3px #fff,0 0 0 5px rgba(42,41,255,.18)}
 .tl-end{opacity:1}
 .tl-end i{background:#e4e4e4;box-shadow:0 0 0 3px #fff}
+
+/* ---------- CV: "in numbers" card ---------- */
+.cv-stats li{display:flex;align-items:center;gap:16px;padding:12px 0;border-top:1px solid var(--line)}
+.cv-stats li:first-child{border-top:0;padding-top:0}
+.cv-stats .n{flex:none;min-width:58px;font-family:var(--display);font-weight:600;font-size:40px;line-height:1;letter-spacing:-.04em;color:var(--blue)}
+.cv-stats strong{display:block;font-family:var(--display);font-weight:600;font-size:15px;line-height:1.25}
+.cv-stats small{display:block;font-size:13px;color:var(--muted)}
+.cv-stats .n{font-size:34px;min-width:48px}.cv-stats li{gap:12px}.cv-stats strong{white-space:nowrap}.cv-stats span{min-width:0}
