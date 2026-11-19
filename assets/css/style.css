@@ -1083,3 +1083,5 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .ms-body > p:first-child::first-letter{float:none;font:inherit;margin:0;color:inherit;line-height:inherit}
 .ms-body mark.hl{padding:0 .08em;background:linear-gradient(rgba(158,243,74,.72),rgba(158,243,74,.72)) no-repeat 0 78%/0% 56%;border-radius:3px}
 .motto-story.in mark.hl{background-size:100% 56%}
+.motto-quote .sign-img{height:clamp(64px,6.6vw,98px);margin:-.15em .2em 0 0;transform:rotate(12deg)}
+@media (max-width:700px){.motto-quote .sign-img{height:58px}}
