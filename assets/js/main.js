@@ -95,7 +95,7 @@
 
   // Lightbox for gallery images
   var lb = document.querySelector('.lb');
-  var figs = Array.prototype.slice.call(document.querySelectorAll('.gallery figure[data-full]'));
+  var figs = Array.prototype.slice.call(document.querySelectorAll('.gallery figure[data-full], figure.ws-feat[data-full]'));
   if (lb && figs.length) {
     var img = lb.querySelector('img'), ct = lb.querySelector('.ct'), cur = 0, last = null;
     var show = function (i) {
@@ -360,44 +360,70 @@
     go(0);
   });
 
-  // Draggable carousels
+  // Draggable carousels — transform-based, eased snapping
   document.querySelectorAll('.cz').forEach(function (cz) {
     var tr = cz.querySelector('.cz-track'), bar = cz.querySelector('.cz-bar i'), num = cz.querySelector('.cz-n b');
-    var items = tr.querySelectorAll('.cz-item'), down = false, moved = false, sx = 0, sl = 0, pid = null;
-    function upd() {
-      var max = tr.scrollWidth - tr.clientWidth;
-      var p = max > 0 ? tr.scrollLeft / max : 1;
-      bar.style.width = Math.max(100 / items.length, p * 100) + '%';
-      var w = items[0] ? items[0].offsetWidth + 16 : 1;
-      var k = Math.min(items.length - 1, Math.round(tr.scrollLeft / w));
-      if (p > .995) k = items.length - 1;
-      num.textContent = String(k + 1).padStart(2, '0');
+    var items = tr.querySelectorAll('.cz-item'), n = items.length; if (!n) return;
+    var idx = 0, x = 0, down = false, moved = false, locked = null, sx = 0, sy = 0, base = 0, pid = null, vx = 0, lx = 0, lt = 0;
+    cz.classList.add('cz-js');
+    function step() { return n > 1 ? items[1].offsetLeft - items[0].offsetLeft : items[0].offsetWidth; }
+    function maxIdx() {
+      var vw = cz.clientWidth, s = step(), w = items[0].offsetWidth;
+      return Math.max(0, Math.min(n - 1, Math.ceil(((n - 1) * s + w - vw) / s)));
     }
-    tr.addEventListener('scroll', upd, { passive: true }); upd();
-    tr.addEventListener('pointerdown', function (e) {
-      if (e.pointerType !== 'mouse' || e.button !== 0) return;
-      down = true; moved = false; sx = e.clientX; sl = tr.scrollLeft; pid = e.pointerId;
+    function setX(v, anim) {
+      x = v; tr.style.transition = anim ? 'transform .75s cubic-bezier(.16,1,.3,1)' : 'none';
+      tr.style.transform = 'translate3d(' + v + 'px,0,0)';
+    }
+    var ui = cz.querySelector('.cz-ui');
+    function go(k, anim) {
+      if (ui) ui.style.maxWidth = cz.parentElement.clientWidth + 'px';
+      var m = maxIdx(); idx = Math.max(0, Math.min(m, k));
+      var limit = -(tr.scrollWidth - cz.clientWidth);
+      var target = Math.max(Math.min(0, limit), -idx * step());
+      setX(idx === m ? Math.min(target, 0) : target, anim !== false);
+      var shown = idx === m ? n : idx + 1;
+      num.textContent = String(shown).padStart(2, '0');
+      bar.style.width = (shown / n * 100) + '%';
+      items.forEach(function (it, q) { it.classList.toggle('cur', q === idx); });
+    }
+    cz.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      down = true; moved = false; locked = null; sx = lx = e.clientX; sy = e.clientY; base = x; pid = e.pointerId; vx = 0; lt = performance.now();
     });
     window.addEventListener('pointermove', function (e) {
       if (!down || e.pointerId !== pid) return;
-      var dx = e.clientX - sx;
-      if (!moved && Math.abs(dx) > 5) { moved = true; tr.classList.add('dragging'); }
-      if (moved) { tr.scrollLeft = sl - dx; e.preventDefault(); }
-    });
-    window.addEventListener('pointerup', function () {
-      if (!down) return; down = false;
-      if (moved) {
-        var w = items[0].offsetWidth + 16, target = Math.round(tr.scrollLeft / w) * w;
-        tr.classList.remove('dragging'); tr.scrollTo({ left: target, behavior: 'smooth' });
+      var dx = e.clientX - sx, dy = e.clientY - sy;
+      if (locked === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+        locked = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+        if (locked === 'x') { moved = true; cz.classList.add('dragging'); try { cz.setPointerCapture(pid); } catch (er) {} }
       }
-    });
+      if (locked !== 'x') return;
+      e.preventDefault();
+      var now = performance.now(); vx = (e.clientX - lx) / Math.max(1, now - lt); lx = e.clientX; lt = now;
+      var limit = Math.min(0, -(tr.scrollWidth - cz.clientWidth)), v = base + dx;
+      if (v > 0) v = v * .3; else if (v < limit) v = limit + (v - limit) * .3;
+      setX(v, false);
+    }, { passive: false });
+    function end() {
+      if (!down) return; down = false; cz.classList.remove('dragging');
+      if (locked !== 'x') return;
+      var s = step(), proj = -x / s - vx * 6;
+      var k = vx < -.35 ? Math.ceil(-x / s) : vx > .35 ? Math.floor(-x / s) : Math.round(proj);
+      go(k);
+    }
+    window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
     tr.addEventListener('click', function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
     tr.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    var pv = cz.querySelector('.cz-prev'), nx = cz.querySelector('.cz-next');
+    if (pv) pv.addEventListener('click', function () { go(idx - 1); });
+    if (nx) nx.addEventListener('click', function () { go(idx + 1); });
     tr.addEventListener('keydown', function (e) {
-      var w = items[0].offsetWidth + 16;
-      if (e.key === 'ArrowRight') { e.preventDefault(); tr.scrollBy({ left: w, behavior: 'smooth' }); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); tr.scrollBy({ left: -w, behavior: 'smooth' }); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(idx + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1); }
     });
+    window.addEventListener('resize', function () { go(idx, false); });
+    go(0, false);
   });
 
   // Interface gallery: highlight current category tab
