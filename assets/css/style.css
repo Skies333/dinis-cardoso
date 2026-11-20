@@ -1372,3 +1372,29 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .ws-card h3{margin-top:0;padding-top:0}
 .ws-card p{color:rgba(255,255,255,.8)}
 .ws-n{color:rgba(255,255,255,.6)}
+
+/* =========================================================
+   CV page
+   ========================================================= */
+.cv-page{padding-top:clamp(108px,12vw,140px)}
+.cv-top{margin-bottom:clamp(30px,4vw,52px)}
+.cv-headline{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-top:clamp(22px,3vw,36px)}
+.cv-headline h1{margin-top:12px;font-size:clamp(52px,8vw,112px);line-height:.95;letter-spacing:-.05em}
+.cv-actions{display:flex;flex-direction:column;align-items:flex-end;gap:14px;max-width:340px;text-align:right}
+.cv-actions p{font-size:15px;line-height:1.55;color:var(--muted)}
+.cv-doc{position:sticky;top:90px;border-radius:var(--r-xl);background:linear-gradient(160deg,#dedcff,#e2e2e2 65%);border:1px solid #d6d6d6;padding:clamp(16px,3vw,40px);overflow:hidden}
+.cv-doc img{display:block;width:100%;height:auto;border-radius:6px;box-shadow:0 30px 60px -34px rgba(20,20,60,.45);transition:transform 1s var(--ease),filter .5s}
+.cv-hover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(23,23,23,.38);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;transition:opacity .45s var(--ease)}
+.cv-hover .btn{transform:translateY(12px) scale(.96);transition:transform .5s var(--ease)}
+.cv-open{color:#fff;font-size:14px;font-weight:500;text-decoration:underline;text-underline-offset:4px;opacity:.9;transform:translateY(12px);transition:transform .5s var(--ease) .04s}
+.cv-doc:hover .cv-hover,.cv-doc:focus-within .cv-hover{opacity:1}
+.cv-doc:hover .cv-hover .btn,.cv-doc:focus-within .cv-hover .btn,.cv-doc:hover .cv-open{transform:none}
+.cv-doc:hover img{transform:scale(1.02)}
+.btn .dot svg{width:15px;height:15px}
+.cv-dl .dot{transition:transform .45s var(--ease)}
+.cv-dl:hover .dot{transform:translateY(2px)}
+@media (hover:none){.cv-hover{position:static;opacity:1;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;margin-top:18px}.cv-hover .btn,.cv-open{transform:none}.cv-open{color:var(--ink)}}
+@media (max-width:900px){.cv-headline{flex-direction:column;align-items:flex-start}.cv-actions{align-items:flex-start;text-align:left}.cv-doc{position:relative;top:0}}
+.cv-doc img{border-radius:4px}
+.cv-hover{background:rgba(23,23,23,.28);backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px)}
+@media (hover:none){.cv-hover{position:static;opacity:1;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding-top:18px}.cv-open{color:var(--ink)}}
