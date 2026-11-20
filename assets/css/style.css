@@ -1363,3 +1363,12 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 @media (max-width:900px){.ws-grid{grid-template-columns:1fr 1fr}.ws-head{grid-template-columns:1fr}}
 @media (max-width:560px){.ws-grid{grid-template-columns:1fr}.ws-card{min-height:0}}
 .ui-tabs{position:relative;top:auto}
+/* strategy cards — all blue with icons */
+.ws-card,.ws-card:first-child{background:var(--blue);min-height:0;box-shadow:0 24px 44px -30px rgba(42,41,255,.7)}
+.ws-card::before,.ws-card:first-child::before{display:none}
+.ws-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.ws-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.16);color:#fff}
+.ws-ic svg{width:22px;height:22px}
+.ws-card h3{margin-top:0;padding-top:0}
+.ws-card p{color:rgba(255,255,255,.8)}
+.ws-n{color:rgba(255,255,255,.6)}
