@@ -69,7 +69,7 @@
   // ---- Scroll-driven: nav hide, marquee velocity, parallax, to-top -------
   var nav = document.querySelector('.nav');
   var track = document.querySelector('.marquee-track');
-  var par = Array.prototype.slice.call(document.querySelectorAll('.about-photo img, .cv-sheet img, .badge-wrap'));
+  var par = Array.prototype.slice.call(document.querySelectorAll('.cv-sheet img, .badge-wrap'));
   var lastY = scrollY, vel = 0, mx = 0;
   if (track) track.style.animation = 'none';
   addEventListener('scroll', function () {

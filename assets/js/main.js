@@ -325,8 +325,9 @@
     function restart() { clearTimeout(timer); timer = setTimeout(function () { if (vis && !document.hidden && !dragging) go(idx + 1); else restart(); }, DUR); }
     if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { vis = es[0].isIntersecting; card.classList.toggle('ap-paused', !vis); }).observe(card);
     dots.forEach(function (d, q) { d.addEventListener('click', function () { go(q, true); }); });
-    card.querySelector('.ap-prev').addEventListener('click', function () { go(idx - 1, true); });
-    card.querySelector('.ap-next').addEventListener('click', function () { go(idx + 1, true); });
+    var pv = card.querySelector('.ap-prev'), nx = card.querySelector('.ap-next');
+    if (pv) pv.addEventListener('click', function () { go(idx - 1, true); });
+    if (nx) nx.addEventListener('click', function () { go(idx + 1, true); });
     // drag / swipe
     var dragging = false, x0 = 0, y0 = 0, dx = 0, w = 1, locked = null, pid = null;
     inner.addEventListener('pointerdown', function (e) {
