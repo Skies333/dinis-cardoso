@@ -1189,3 +1189,38 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .about-photo h3 .soft{color:rgba(255,255,255,.7)}
 @media (max-width:1000px){.about-photo .inner{aspect-ratio:4/5}}
 @media (max-width:560px){.about-photo h3{font-size:30px}.ap-nav button{width:40px;height:40px}.ap-tag{margin-bottom:12px}}
+
+/* =========================================================
+   Motto story v4 — steps + speech bubble
+   ========================================================= */
+.tale{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,4vw,64px);align-items:center;max-width:1080px;margin:clamp(36px,4vw,56px) auto 0;text-align:left}
+.story-steps{list-style:none;margin:0;padding:0;position:relative;display:grid;gap:clamp(22px,2.6vw,34px)}
+.story-steps::before{content:"";position:absolute;left:21px;top:22px;bottom:22px;width:2px;background:linear-gradient(var(--line),var(--line)) ;border-radius:2px}
+.st{position:relative;display:grid;grid-template-columns:44px 1fr;gap:18px;align-items:start}
+.st-dot{position:relative;z-index:1;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #dcdcdc;font-family:var(--display);font-weight:600;font-size:13px;color:var(--muted);box-shadow:0 0 0 6px #fff}
+.st h3{font-size:clamp(19px,1.6vw,22px);margin:9px 0 6px}
+.st p{font-size:15px;line-height:1.6;color:var(--muted);max-width:40ch}
+.st-key .st-dot{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 0 6px #fff,0 8px 20px -6px rgba(42,41,255,.6)}
+.st-key h3{color:var(--blue)}
+.story-quote{position:relative;margin:0;padding:clamp(30px,3.6vw,48px);border-radius:32px;background:var(--blue);color:#fff;box-shadow:0 30px 60px -30px rgba(42,41,255,.7);overflow:visible}
+.story-quote::after{content:"";position:absolute;left:-14px;top:50%;width:30px;height:30px;background:var(--blue);border-radius:6px;transform:translateY(-50%) rotate(45deg)}
+.story-quote::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(120% 90% at 100% 0%,rgba(255,255,255,.18),transparent 55%);pointer-events:none}
+.sq-mark{position:absolute;top:-6px;right:28px;font-family:"Caveat",cursive;font-weight:700;font-size:160px;line-height:1;color:var(--lime);opacity:.9}
+.story-quote blockquote{position:relative;z-index:1;margin:0;font-family:"Caveat",cursive;font-weight:700;font-size:clamp(38px,4vw,56px);line-height:1.02;letter-spacing:-.005em;max-width:12ch}
+.story-quote figcaption{position:relative;z-index:1;display:flex;align-items:center;gap:10px;margin-top:clamp(22px,2.4vw,30px);font-size:14px;font-weight:500;color:rgba(255,255,255,.8)}
+.sq-av{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.16)}
+.sq-av svg{width:16px;height:16px}
+.story-quote .smile{width:26px;height:26px;margin-left:2px}
+.story-quote .smile path{fill:none;stroke:var(--lime);stroke-width:5;stroke-linecap:round}
+.js .story-quote .smile path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .7s ease .9s}
+.js .story-quote.in .smile path{stroke-dashoffset:0}
+.js .story-quote{transform:translateY(24px) scale(.97)}
+.js .story-quote.in{transform:none}
+@media (max-width:900px){
+  .tale{grid-template-columns:1fr;max-width:560px}
+  .story-quote::after{left:50%;top:-12px;transform:translateX(-50%) rotate(45deg)}
+  .sq-mark{font-size:120px}
+}
+@media (prefers-reduced-motion:reduce){.js .story-quote .smile path{stroke-dashoffset:0}}
+.story-steps::before{display:none}
+.st:not(:last-child)::after{content:"";position:absolute;left:21px;top:44px;height:calc(100% - 44px + clamp(22px,2.6vw,34px));width:2px;background:var(--line)}
