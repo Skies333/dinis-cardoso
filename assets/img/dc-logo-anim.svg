@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-200 -120 1206 780" role="img" aria-label="dc — logótipo animado">
+<style>
+.st{animation:stem 7s cubic-bezier(.65,0,.35,1) infinite both}
+@keyframes stem{0%,4%{transform:scaleY(0)}18%,88%{transform:scaleY(1)}96%,100%{transform:scaleY(0)}}
+.d,.c{stroke-dasharray:100 100;animation:draw 7s cubic-bezier(.65,0,.35,1) infinite both}
+.c{animation-name:drawc}
+@keyframes draw{0%,14%{stroke-dashoffset:100}34%,86%{stroke-dashoffset:0}95%,100%{stroke-dashoffset:-100}}
+@keyframes drawc{0%,22%{stroke-dashoffset:100}42%,86%{stroke-dashoffset:0}95%,100%{stroke-dashoffset:-100}}
+.sol{animation:sol 7s cubic-bezier(.34,1.56,.64,1) infinite both}
+@keyframes sol{0%,44%{transform:translateX(420px) scale(0)}56%{transform:translateX(0) scale(1.25)}62%,84%{transform:translateX(0) scale(1)}92%,100%{transform:translateX(0) scale(0)}}
+.tx{animation:tx 7s ease infinite both}
+@keyframes tx{0%,58%{opacity:0;transform:translateY(20px)}68%,86%{opacity:1;transform:none}94%,100%{opacity:0}}
+.gd{animation:gd 7s ease infinite both}@keyframes gd{0%,2%{opacity:0}10%,30%{opacity:1}44%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.st,.d,.c,.sol,.tx,.gd{animation:none}}
+</style>
+<defs><mask id="cm" maskUnits="userSpaceOnUse" x="-200" y="-120" width="1206" height="780"><rect x="-200" y="-120" width="1206" height="780" fill="#fff"/><rect x="602" y="311" width="300" height="67" fill="#000"/></mask></defs>
+<rect x="-200" y="-120" width="1206" height="780" fill="#2a29ff"/>
+<g class="gd" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-dasharray="8 8"><circle cx="198" cy="345" r="195"/><circle cx="602" cy="345" r="195"/><line x1="-200" y1="345" x2="1006" y2="345"/></g>
+<g fill="none" stroke="#fff" stroke-width="108">
+<circle class="d" cx="198" cy="345" r="141" pathLength="100" transform="rotate(-90 198 345)"/>
+<g mask="url(#cm)"><circle class="c" cx="602" cy="345" r="141" pathLength="100" transform="rotate(10 602 345)"/></g></g>
+<rect class="st" x="315" y="0" width="110" height="525" fill="#fff" style="transform-origin:370px 0"/>
+<circle class="sol" cx="742" cy="345" r="30" fill="#9ef34a" style="transform-box:fill-box;transform-origin:center"/>
+<text class="tx" x="400" y="630" text-anchor="middle" font-family="Manrope,Inter,system-ui,sans-serif" font-weight="800" font-size="46" letter-spacing="-1" fill="#fff">Dinis Cardoso<tspan fill="#9ef34a">.</tspan></text>
+</svg>

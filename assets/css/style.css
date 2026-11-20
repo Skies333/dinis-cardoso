@@ -1467,3 +1467,8 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .ws-feat figcaption{position:absolute;left:18px;bottom:18px;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:999px;background:rgba(255,255,255,.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:13.5px;font-weight:500}
 .ws-badge{padding:4px 10px;border-radius:999px;background:var(--blue);font-size:12px;font-weight:600}
 @media (max-width:700px){.ws-feat figcaption{position:static;margin:0;border-radius:0;background:#120f1d;padding:12px 14px}}
+/* dc brand story */
+.dc-story .ws-head .no b{width:auto;padding:0 9px;border-radius:99px;font-family:var(--display);font-weight:800;letter-spacing:-.02em}
+.dc-ic{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.04em}
+.hand-lead{font-family:"Caveat",cursive;font-weight:700;font-size:clamp(28px,2.6vw,36px)!important;line-height:1.1!important;color:var(--blue)!important}
+.gallery figure.anim{background:#2a29ff;border-color:#2a29ff}

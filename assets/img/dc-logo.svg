@@ -1,0 +1,3 @@
+<svg width="800" height="540" viewBox="0 0 800 540" xmlns="http://www.w3.org/2000/svg" ><defs><mask id="mx" maskUnits="userSpaceOnUse" x="0" y="0" width="900" height="600"><rect x="0" y="0" width="900" height="600" fill="#fff"/><rect x="602" y="311" width="260" height="67" fill="#000"/></mask></defs>
+<g fill="none" stroke="#2a29ff" stroke-width="108"><circle cx="198" cy="345" r="141"/><circle cx="602" cy="345" r="141" mask="url(#mx)"/></g>
+<rect x="315" y="0" width="110" height="525" fill="#2a29ff"/></svg>
