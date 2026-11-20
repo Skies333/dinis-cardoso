@@ -310,17 +310,16 @@
   }
 
   // About card: draggable photo slider with autoplay
-  (function () {
-    var card = document.querySelector('.about-photo'); if (!card) return;
+  document.querySelectorAll('.about-photo, .badge-card').forEach(function (card) {
     var track = card.querySelector('.ap-slides'), slides = card.querySelectorAll('.ap-slide'), dots = card.querySelectorAll('.ap-dot');
     var n = slides.length; if (n < 2) return;
-    var inner = card.querySelector('.inner'), idx = 0, vis = true, timer = null, DUR = 4200;
+    var inner = card.querySelector('[data-drag]') || card.querySelector('.inner'), idx = 0, vis = true, timer = null, DUR = 4200;
     card.classList.add('ap-ready');
     function go(k, user) {
       idx = (k + n) % n;
       track.style.transition = ''; track.style.transform = 'translate3d(' + (-idx * 100) + '%,0,0)';
       slides.forEach(function (s, q) { s.classList.toggle('on', q === idx); });
-      dots.forEach(function (d, q) { d.classList.remove('on'); if (q === idx) { void d.offsetWidth; d.classList.add('on'); } });
+      dots.forEach(function (d, q) { d.classList.remove('on'); d.classList.toggle('done', q < idx); if (q === idx) { void d.offsetWidth; d.classList.add('on'); } });
       restart();
     }
     function restart() { clearTimeout(timer); timer = setTimeout(function () { if (vis && !document.hidden && !dragging) go(idx + 1); else restart(); }, DUR); }
@@ -359,7 +358,7 @@
     inner.addEventListener('dragstart', function (e) { e.preventDefault(); });
     card.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') go(idx - 1, true); if (e.key === 'ArrowRight') go(idx + 1, true); });
     go(0);
-  })();
+  });
 
   // Draggable carousels
   document.querySelectorAll('.cz').forEach(function (cz) {

@@ -1398,3 +1398,18 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .cv-doc img{border-radius:4px}
 .cv-hover{background:rgba(23,23,23,.28);backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px)}
 @media (hover:none){.cv-hover{position:static;opacity:1;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding-top:18px}.cv-open{color:var(--ink)}}
+
+/* Badge photo carousel */
+.badge-photo{position:relative;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.badge-photo.grabbing{cursor:grabbing}
+.badge-photo .ap-slides{display:flex;height:100%;transition:transform .7s cubic-bezier(.22,1,.36,1);will-change:transform}
+.badge-photo .ap-slide{flex:0 0 100%;width:100%;height:100%;object-fit:cover;object-position:var(--x,50%) 30%;pointer-events:none}
+.badge-photo .ap-slide:first-child{object-position:50% 35%}
+.badge-bars.ap-dots{position:static;transform:none;display:flex;gap:5px;padding:0;margin-bottom:16px;background:none;border:0;backdrop-filter:none;-webkit-backdrop-filter:none}
+.badge-bars .ap-dot{flex:1;height:4px;width:auto;padding:0;border:0;border-radius:4px;background:rgba(158,243,74,.3);overflow:hidden;cursor:pointer;position:relative}
+.badge-bars .ap-dot.on{width:auto;background:rgba(158,243,74,.3)}
+.badge-bars .ap-dot i{position:absolute;inset:0;height:auto;border-radius:inherit;background:var(--lime);transform:scaleX(0);transform-origin:left;animation:none}
+.badge-bars .ap-dot.done i{transform:scaleX(1)}
+.badge-bars .ap-dot.on i{animation:apfill 4.2s linear forwards}
+.badge-card.ap-paused .badge-bars .ap-dot.on i{animation-play-state:paused}
+.badge-bars .ap-dot:hover{background:rgba(158,243,74,.5)}
