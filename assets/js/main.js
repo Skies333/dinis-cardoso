@@ -308,19 +308,56 @@
     });
   }
 
-  // About card: crossfade through photos
-  var apS = document.querySelectorAll('.about-photo .ap-slide'), apD = document.querySelectorAll('.about-photo .ap-dots i');
-  if (apS.length > 1) {
-    var apI = 0, apVis = true;
-    var apCard = document.querySelector('.about-photo');
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { apVis = es[0].isIntersecting; }).observe(apCard);
-    setInterval(function () {
-      if (!apVis || document.hidden) return;
-      apS[apI].classList.remove('on'); if (apD[apI]) apD[apI].classList.remove('on');
-      apI = (apI + 1) % apS.length;
-      apS[apI].classList.add('on'); if (apD[apI]) apD[apI].classList.add('on');
-    }, 3800);
-  }
+  // About card: draggable photo slider with autoplay
+  (function () {
+    var card = document.querySelector('.about-photo'); if (!card) return;
+    var track = card.querySelector('.ap-slides'), slides = card.querySelectorAll('.ap-slide'), dots = card.querySelectorAll('.ap-dot');
+    var n = slides.length; if (n < 2) return;
+    var inner = card.querySelector('.inner'), idx = 0, vis = true, timer = null, DUR = 4200;
+    card.classList.add('ap-ready');
+    function go(k, user) {
+      idx = (k + n) % n;
+      track.style.transition = ''; track.style.transform = 'translate3d(' + (-idx * 100) + '%,0,0)';
+      slides.forEach(function (s, q) { s.classList.toggle('on', q === idx); });
+      dots.forEach(function (d, q) { d.classList.remove('on'); if (q === idx) { void d.offsetWidth; d.classList.add('on'); } });
+      restart();
+    }
+    function restart() { clearTimeout(timer); timer = setTimeout(function () { if (vis && !document.hidden && !dragging) go(idx + 1); else restart(); }, DUR); }
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { vis = es[0].isIntersecting; card.classList.toggle('ap-paused', !vis); }).observe(card);
+    dots.forEach(function (d, q) { d.addEventListener('click', function () { go(q, true); }); });
+    card.querySelector('.ap-prev').addEventListener('click', function () { go(idx - 1, true); });
+    card.querySelector('.ap-next').addEventListener('click', function () { go(idx + 1, true); });
+    // drag / swipe
+    var dragging = false, x0 = 0, y0 = 0, dx = 0, w = 1, locked = null, pid = null;
+    inner.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0 || e.target.closest('a,button')) return;
+      dragging = true; locked = null; x0 = e.clientX; y0 = e.clientY; dx = 0; w = inner.offsetWidth; pid = e.pointerId;
+      card.classList.add('ap-paused');
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!dragging || e.pointerId !== pid) return;
+      var mx = e.clientX - x0, my = e.clientY - y0;
+      if (locked === null && (Math.abs(mx) > 6 || Math.abs(my) > 6)) {
+        locked = Math.abs(mx) > Math.abs(my) ? 'x' : 'y';
+        if (locked === 'x') { try { inner.setPointerCapture(pid); } catch (er) {} inner.classList.add('grabbing'); }
+      }
+      if (locked !== 'x') return;
+      e.preventDefault();
+      dx = mx;
+      var edge = (idx === 0 && dx > 0) || (idx === n - 1 && dx < 0) ? .35 : 1;
+      track.style.transition = 'none';
+      track.style.transform = 'translate3d(calc(' + (-idx * 100) + '% + ' + (dx * edge) + 'px),0,0)';
+    }, { passive: false });
+    function end() {
+      if (!dragging) return; dragging = false; inner.classList.remove('grabbing'); card.classList.remove('ap-paused');
+      if (locked === 'x' && Math.abs(dx) > w * .18) go(idx + (dx < 0 ? 1 : -1) < 0 ? 0 : Math.min(n - 1, idx + (dx < 0 ? 1 : -1)), true);
+      else go(idx);
+    }
+    window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+    inner.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    card.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') go(idx - 1, true); if (e.key === 'ArrowRight') go(idx + 1, true); });
+    go(0);
+  })();
 
   var y = document.querySelector('[data-year]');
   if (y) y.textContent = new Date().getFullYear();

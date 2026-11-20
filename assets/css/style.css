@@ -1150,3 +1150,42 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .svc:nth-child(4),.svc:nth-child(5){grid-column:span 2}
 @media (max-width:1000px){.svc-grid .svc,.svc-grid .svc:nth-child(5){grid-column:span 1}}
 @media (max-width:700px){.svc-grid{grid-template-columns:1fr}}
+
+/* =========================================================
+   About card v3 — draggable slider, refined text & controls
+   ========================================================= */
+.about-photo .inner{touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.about-photo .inner.grabbing{cursor:grabbing}
+.about-photo .ap-slides{display:flex;transition:transform .7s cubic-bezier(.22,1,.36,1);will-change:transform}
+.about-photo .ap-slide{position:relative;inset:auto;flex:0 0 100%;opacity:1;transition:transform 1.2s cubic-bezier(.22,1,.36,1);transform:scale(1.06);pointer-events:none}
+.about-photo .ap-slide.on{transform:scale(1)}
+/* indicator — glass pill with progress bars */
+.about-photo .ap-dots{top:16px;left:50%;right:auto;transform:translateX(-50%);gap:5px;padding:7px 9px;border-radius:999px;background:rgba(20,20,20,.28);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);border:1px solid rgba(255,255,255,.18)}
+.about-photo .ap-dot{position:relative;width:7px;height:7px;padding:0;border:0;border-radius:999px;background:rgba(255,255,255,.45);overflow:hidden;cursor:pointer;transition:width .5s var(--ease),background .3s}
+.about-photo .ap-dot:hover{background:rgba(255,255,255,.75)}
+.about-photo .ap-dot.on{width:30px;background:rgba(255,255,255,.35)}
+.about-photo .ap-dot i{position:absolute;inset:0;border-radius:inherit;background:#fff;transform:scaleX(0);transform-origin:left}
+.about-photo .ap-dot.on i{animation:apfill 4.2s linear forwards}
+.about-photo.ap-paused .ap-dot.on i{animation-play-state:paused}
+@keyframes apfill{to{transform:scaleX(1)}}
+/* overlay text */
+.about-photo .over{background:linear-gradient(180deg,rgba(0,0,0,0) 38%,rgba(0,0,0,.35) 60%,rgba(0,0,0,.82));pointer-events:none}
+.about-photo .over>*{pointer-events:auto}
+.about-photo .over .ap-tag{pointer-events:none}
+.ap-tag{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;padding:6px 12px 6px 10px;border-radius:999px;font-size:12.5px;font-weight:500;letter-spacing:.01em;color:#fff;background:rgba(255,255,255,.14);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2)}
+.ap-tag i{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 3px rgba(158,243,74,.25)}
+.about-photo h3{font-size:clamp(30px,3.1vw,42px);line-height:1.04;letter-spacing:-.035em;max-width:13ch;text-shadow:0 2px 24px rgba(0,0,0,.25)}
+.about-photo h3 span{display:block}
+.about-photo h3 .soft{color:rgba(255,255,255,.62)}
+.about-photo p{margin:12px 0 22px;font-size:15px;line-height:1.5;max-width:30ch;color:rgba(255,255,255,.78)}
+.ap-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ap-nav{display:flex;gap:8px}
+.ap-nav button{display:grid;place-items:center;width:44px;height:44px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;cursor:pointer;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:background .3s,color .3s,transform .3s var(--ease)}
+.ap-nav button:hover{background:#fff;color:var(--ink)}
+.ap-nav button:active{transform:scale(.92)}
+.ap-nav svg{width:18px;height:18px}
+@media (prefers-reduced-motion:reduce){.about-photo .ap-slides,.about-photo .ap-slide{transition:none}.about-photo .ap-dot.on i{animation:none;transform:scaleX(1)}}
+.about-photo .over{background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.45) 55%,rgba(0,0,0,.86))}
+.about-photo h3 .soft{color:rgba(255,255,255,.7)}
+@media (max-width:1000px){.about-photo .inner{aspect-ratio:4/5}}
+@media (max-width:560px){.about-photo h3{font-size:30px}.ap-nav button{width:40px;height:40px}.ap-tag{margin-bottom:12px}}
