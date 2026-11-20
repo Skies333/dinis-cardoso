@@ -1413,3 +1413,26 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .badge-bars .ap-dot.on i{animation:apfill 4.2s linear forwards}
 .badge-card.ap-paused .badge-bars .ap-dot.on i{animation-play-state:paused}
 .badge-bars .ap-dot:hover{background:rgba(158,243,74,.5)}
+
+/* =========================================================
+   Tools v2 — refined progress bars
+   ========================================================= */
+.tools.v2{display:grid;gap:10px;max-width:540px}
+.tools.v2 .tool{position:relative;display:grid;grid-template-columns:44px 1fr;align-items:center;gap:14px;height:auto;padding:14px 18px 14px 14px;border-radius:20px;background:#fff;border:1px solid var(--line);box-shadow:0 1px 2px rgba(0,0,0,.03);overflow:visible;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s}
+.tools.v2 .tool:hover{transform:translateY(-2px);border-color:rgba(42,41,255,.25);box-shadow:0 16px 32px -20px rgba(42,41,255,.45)}
+.tools.v2 .ti{width:44px;height:44px;border-radius:13px;background:var(--soft);display:grid;place-items:center}
+.tools.v2 .ti img{width:24px;height:24px}
+.tools.v2 .tb{min-width:0}
+.tools.v2 .tt{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:9px}
+.tools.v2 .tt b{display:block;font-size:15px;font-weight:600;color:var(--ink)}
+.tools.v2 .tt small{display:block;margin-top:1px;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tools.v2 .pct{position:static;padding:0;background:none;color:var(--blue);font-family:var(--display);font-size:15px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tools.v2 .track{position:relative;height:8px;border-radius:99px;background:#ececf3;overflow:hidden}
+.tools.v2 .track::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(10% - 2px),#fff calc(10% - 2px) 10%);pointer-events:none;opacity:.9}
+.tools.v2 .fill{position:absolute;left:0;top:0;bottom:0;width:var(--v);border-radius:inherit;background:linear-gradient(90deg,#6b6aff,var(--blue));box-shadow:0 0 12px rgba(42,41,255,.45);transform:none;inset:auto;height:100%}
+.tools.v2 .fill::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);background-size:200% 100%;animation:shine 2.6s ease-in-out infinite}
+@keyframes shine{0%{background-position:150% 0}60%,100%{background-position:-50% 0}}
+.js .tools.v2 .tool .fill{width:0;transition:width 1.4s cubic-bezier(.22,1,.36,1) var(--d,0s)}
+.js .tools.v2 .tool.in .fill{width:var(--v)}
+@media (prefers-reduced-motion:reduce){.tools.v2 .fill::after{animation:none}.js .tools.v2 .tool .fill{transition:none;width:var(--v)}}
+.tools.v2 .tt>span:first-child{flex:1;min-width:0}.tools.v2 .pct{flex:none}
