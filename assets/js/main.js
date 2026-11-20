@@ -361,6 +361,46 @@
     go(0);
   })();
 
+  // Draggable carousels
+  document.querySelectorAll('.cz').forEach(function (cz) {
+    var tr = cz.querySelector('.cz-track'), bar = cz.querySelector('.cz-bar i'), num = cz.querySelector('.cz-n b');
+    var items = tr.querySelectorAll('.cz-item'), down = false, moved = false, sx = 0, sl = 0, pid = null;
+    function upd() {
+      var max = tr.scrollWidth - tr.clientWidth;
+      var p = max > 0 ? tr.scrollLeft / max : 1;
+      bar.style.width = Math.max(100 / items.length, p * 100) + '%';
+      var w = items[0] ? items[0].offsetWidth + 16 : 1;
+      var k = Math.min(items.length - 1, Math.round(tr.scrollLeft / w));
+      if (p > .995) k = items.length - 1;
+      num.textContent = String(k + 1).padStart(2, '0');
+    }
+    tr.addEventListener('scroll', upd, { passive: true }); upd();
+    tr.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      down = true; moved = false; sx = e.clientX; sl = tr.scrollLeft; pid = e.pointerId;
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!down || e.pointerId !== pid) return;
+      var dx = e.clientX - sx;
+      if (!moved && Math.abs(dx) > 5) { moved = true; tr.classList.add('dragging'); }
+      if (moved) { tr.scrollLeft = sl - dx; e.preventDefault(); }
+    });
+    window.addEventListener('pointerup', function () {
+      if (!down) return; down = false;
+      if (moved) {
+        var w = items[0].offsetWidth + 16, target = Math.round(tr.scrollLeft / w) * w;
+        tr.classList.remove('dragging'); tr.scrollTo({ left: target, behavior: 'smooth' });
+      }
+    });
+    tr.addEventListener('click', function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+    tr.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    tr.addEventListener('keydown', function (e) {
+      var w = items[0].offsetWidth + 16;
+      if (e.key === 'ArrowRight') { e.preventDefault(); tr.scrollBy({ left: w, behavior: 'smooth' }); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); tr.scrollBy({ left: -w, behavior: 'smooth' }); }
+    });
+  });
+
   // Interface gallery: highlight current category tab
   var uiTabs = document.querySelectorAll('.ui-tab');
   if (uiTabs.length && 'IntersectionObserver' in window) {
