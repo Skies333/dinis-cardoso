@@ -102,7 +102,8 @@
       cur = (i + figs.length) % figs.length;
       img.src = figs[cur].getAttribute('data-full');
       img.alt = figs[cur].querySelector('img').alt;
-      ct.textContent = (cur + 1) + ' / ' + figs.length;
+      var cap = figs[cur].getAttribute('data-cap');
+      ct.textContent = (cur + 1) + ' / ' + figs.length + (cap ? '  ·  ' + cap : '');
     };
     var open = function (i) {
       last = document.activeElement; show(i);
@@ -359,6 +360,15 @@
     card.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') go(idx - 1, true); if (e.key === 'ArrowRight') go(idx + 1, true); });
     go(0);
   })();
+
+  // Interface gallery: highlight current category tab
+  var uiTabs = document.querySelectorAll('.ui-tab');
+  if (uiTabs.length && 'IntersectionObserver' in window) {
+    var uiIo = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) uiTabs.forEach(function (tb) { tb.classList.toggle('on', tb.getAttribute('href') === '#' + en.target.id); }); });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.ui-cat').forEach(function (cEl) { uiIo.observe(cEl); });
+  }
 
   var y = document.querySelector('[data-year]');
   if (y) y.textContent = new Date().getFullYear();
