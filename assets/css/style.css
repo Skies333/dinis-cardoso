@@ -1542,3 +1542,68 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 @media (prefers-reduced-motion:reduce){.js .dcp .p-d,.js .dcp .p-c{stroke-dashoffset:0!important}.js .dcp-2 .p-s{transform:none!important}}
 .dc-story .ws-head{align-items:end}
 .dc-story .ws-head h2{margin-top:0}
+
+/* =========================================================
+   Motion pack v2 — more life across the site
+   ========================================================= */
+/* 1. Page entrance: nav + language toggle */
+@keyframes navIn{from{opacity:0;translate:0 -24px}to{opacity:1;translate:0 0}}
+.js .nav{animation:navIn .9s var(--ease) .15s both}
+.js .lang-toggle{animation:navIn .9s var(--ease) .35s both}
+
+/* 2. Hero highlight word — soft moving sheen */
+.hero h1 em{background:linear-gradient(100deg,var(--blue) 0%,var(--blue) 40%,#8f8eff 50%,var(--blue) 60%,var(--blue) 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:sheen 6s ease-in-out 1.6s infinite}
+@keyframes sheen{0%{background-position:100% 0}45%,100%{background-position:-60% 0}}
+
+/* 3. Badge drops in on its lanyard, then sways gently */
+.badge{transform-origin:50% -120px}
+.js .badge{animation:badgeDrop 1.5s cubic-bezier(.2,.9,.25,1) .25s both,badgeSway 7s ease-in-out 2s infinite}
+@keyframes badgeDrop{0%{opacity:0;transform:translateY(-90px) rotate(-9deg)}45%{opacity:1;transform:translateY(8px) rotate(4deg)}70%{transform:translateY(-3px) rotate(-1.8deg)}100%{transform:none}}
+@keyframes badgeSway{0%,100%{transform:rotate(0)}50%{transform:rotate(1.2deg)}}
+
+/* 4. Kicker line draws in */
+.js .rv .kicker::before,.js .kicker.rv::before{width:0;transition:width .8s var(--ease) .25s}
+.js .rv.in .kicker::before,.js .kicker.rv.in::before{width:22px}
+
+/* 5. Services — icon pops, title slides */
+.js .svc .ic{transform:scale(.4) rotate(-25deg);opacity:0;transition:transform .8s cubic-bezier(.34,1.56,.64,1),opacity .5s;transition-delay:calc(var(--d,0s) + .2s)}
+.js .svc.in .ic{transform:none;opacity:1}
+.svc:hover .ic svg{animation:wiggle .6s ease}
+@keyframes wiggle{25%{transform:rotate(-12deg)}60%{transform:rotate(9deg)}100%{transform:none}}
+
+/* 6. Project cards — image wipes in, arrow turns on hover */
+.js .card .media{clip-path:inset(12% 6% 12% 6% round 24px);transition:clip-path 1.2s var(--ease);transition-delay:var(--d,0s)}
+.js .card.in .media{clip-path:inset(0 0 0 0 round 0)}
+.card .go svg{transition:transform .45s var(--ease)}
+.card:hover .go svg{transform:rotate(45deg)}
+.js .card .tags .chip{opacity:0;transform:translateY(-8px);transition:opacity .5s,transform .5s var(--ease)}
+.js .card.in .tags .chip{opacity:1;transform:none;transition-delay:calc(var(--d,0s) + .6s)}
+.js .card.in .tags .chip+.chip{transition-delay:calc(var(--d,0s) + .7s)}
+
+/* 7. Buttons — light sweep on hover */
+.btn{position:relative;overflow:hidden;isolation:isolate}
+.btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .7s var(--ease);z-index:-1;pointer-events:none}
+.btn:hover::after{left:130%}
+
+/* 8. Chips stagger (CV skills, tools) */
+.js .cv-chips .chip,.js .cv-tools .cv-tool{opacity:0;transform:translateY(10px) scale(.96);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.js .cv-chips.in .chip,.js .cv-tools.in .cv-tool{opacity:1;transform:none}
+.cv-chips .chip:nth-child(1),.cv-tools .cv-tool:nth-child(1){transition-delay:.05s}.cv-chips .chip:nth-child(2),.cv-tools .cv-tool:nth-child(2){transition-delay:.1s}.cv-chips .chip:nth-child(3),.cv-tools .cv-tool:nth-child(3){transition-delay:.15s}.cv-chips .chip:nth-child(4),.cv-tools .cv-tool:nth-child(4){transition-delay:.2s}.cv-chips .chip:nth-child(5),.cv-tools .cv-tool:nth-child(5){transition-delay:.25s}.cv-chips .chip:nth-child(6),.cv-tools .cv-tool:nth-child(6){transition-delay:.3s}.cv-chips .chip:nth-child(7){transition-delay:.35s}.cv-chips .chip:nth-child(8){transition-delay:.4s}.cv-chips .chip:nth-child(9){transition-delay:.45s}.cv-chips .chip:nth-child(10){transition-delay:.5s}
+.cv-tool i{transition:transform .45s var(--ease)}.cv-tool:hover i{transform:rotate(-8deg) scale(1.08)}
+
+/* 9. Tools list — icon bounce on hover */
+.tools.v2 .ti img{transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.tools.v2 .tool:hover .ti img{transform:scale(1.18) rotate(-6deg)}
+
+/* 10. Section headings — subtle underline sweep under the blue word, footer links */
+.foot a,.footer a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1.5px no-repeat;transition:background-size .4s var(--ease)}
+.foot a:hover,.footer a:hover{background-size:100% 1.5px}
+
+/* 11. Floating idle motion on the post-it pin and smile */
+.pin{animation:pinBob 4s ease-in-out infinite}
+@keyframes pinBob{50%{transform:translateY(-3px)}}
+
+@media (prefers-reduced-motion:reduce){
+  .js .nav,.js .lang-toggle,.js .badge,.hero h1 em,.pin{animation:none!important}
+  .js .svc .ic,.js .card .media,.js .card .tags .chip,.js .cv-chips .chip,.js .cv-tools .cv-tool{opacity:1!important;transform:none!important;clip-path:none!important}
+}

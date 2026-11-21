@@ -37,7 +37,7 @@
   if (hero) requestAnimationFrame(function () { requestAnimationFrame(function () { hero.classList.add('ready'); }); });
 
   // Reveal on scroll
-  var els = document.querySelectorAll('.rv, .tool, .motto-quote, .beats');
+  var els = document.querySelectorAll('.rv, .tool, .motto-quote, .beats, .socials, .cv-chips, .cv-tools, .chips-in, .stagger');
   if (!('IntersectionObserver' in window) || reduce) {
     els.forEach(function (el) { el.classList.add('in'); });
   } else {
