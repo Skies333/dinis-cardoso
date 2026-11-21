@@ -1508,3 +1508,4 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
   .pn2-txt{max-width:100%}
 }
 @media (max-width:820px){.pn2-item.next .pn2-thumb{order:-1}.pn2-txt em{-webkit-line-clamp:2}}
+.card .logo.dark.blue,.ph-brand .lg.dark.blue,.p-info .lg.dark.blue,.lg.dark.blue,.logo.dark.blue{background:var(--blue);border-color:var(--blue)}
