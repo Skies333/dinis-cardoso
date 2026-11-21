@@ -1514,3 +1514,4 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .card .bar .txt{min-width:0;flex:1}
 .card .bar .txt h3{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card .bar .txt p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.9em;line-height:1.45}
+.dc-story .ws-head .no b{text-transform:none}
