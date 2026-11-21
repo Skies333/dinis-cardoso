@@ -1472,3 +1472,4 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .dc-ic{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.04em}
 .hand-lead{font-family:"Caveat",cursive;font-weight:700;font-size:clamp(28px,2.6vw,36px)!important;line-height:1.1!important;color:var(--blue)!important}
 .gallery figure.anim{background:#2a29ff;border-color:#2a29ff}
+@media (min-width:701px){.p-cover .frame[style*="--cr"]{aspect-ratio:var(--cr)}}
