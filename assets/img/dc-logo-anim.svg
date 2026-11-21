@@ -2,10 +2,10 @@
 <style>
 .st{animation:stem 7s cubic-bezier(.65,0,.35,1) infinite both}
 @keyframes stem{0%,4%{transform:scaleY(0)}18%,88%{transform:scaleY(1)}96%,100%{transform:scaleY(0)}}
-.d,.c{stroke-dasharray:101 100;animation:draw 7s cubic-bezier(.65,0,.35,1) infinite both}
+.d,.c{stroke-dasharray:101 200;animation:draw 7s cubic-bezier(.65,0,.35,1) infinite both}
 .c{animation-name:drawc}
-@keyframes draw{0%,14%{stroke-dashoffset:100}34%,86%{stroke-dashoffset:0}95%,100%{stroke-dashoffset:-100}}
-@keyframes drawc{0%,22%{stroke-dashoffset:100}42%,86%{stroke-dashoffset:0}95%,100%{stroke-dashoffset:-100}}
+@keyframes draw{0%,14%{stroke-dashoffset:101}34%,86%{stroke-dashoffset:0}95%,100%{stroke-dashoffset:-101}}
+@keyframes drawc{0%,22%{stroke-dashoffset:101}42%,86%{stroke-dashoffset:0}95%,100%{stroke-dashoffset:-101}}
 .tx{animation:tx 7s ease infinite both}
 @keyframes tx{0%,58%{opacity:0;transform:translateY(20px)}68%,86%{opacity:1;transform:none}94%,100%{opacity:0}}
 .gd{animation:gd 7s ease infinite both}@keyframes gd{0%,2%{opacity:0}10%,30%{opacity:1}44%,100%{opacity:0}}
