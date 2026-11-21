@@ -1541,3 +1541,4 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 @media (max-width:480px){.dcx{flex-direction:column}.dcx-art{aspect-ratio:16/9;border-right:0;border-bottom:1px solid var(--line)}}
 @media (prefers-reduced-motion:reduce){.js .dcp .p-d,.js .dcp .p-c{stroke-dashoffset:0!important}.js .dcp-2 .p-s{transform:none!important}}
 .dc-story .ws-head{align-items:end}
+.dc-story .ws-head h2{margin-top:0}
