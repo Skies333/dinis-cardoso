@@ -1656,3 +1656,4 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .life-grid .lf-card:last-child{grid-column:2/4}
 @media (max-width:900px){.life-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.lf-photo{grid-column:1/-1;grid-row:auto;min-height:360px}.life-grid .lf-card:last-child{grid-column:1/-1}}
 @media (max-width:560px){.life-grid{grid-template-columns:1fr}}
+.cv-tool.cv-ai{grid-column:1/-1}.cv-tools .cv-tool:nth-child(7){transition-delay:.35s}
