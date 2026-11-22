@@ -1658,3 +1658,11 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 @media (max-width:560px){.life-grid{grid-template-columns:1fr}}
 .cv-tool.cv-ai{grid-column:1/-1}.cv-tools .cv-tool:nth-child(7){transition-delay:.35s}
 .tools.v2 .track::after{background:repeating-linear-gradient(90deg,transparent 0 calc(20% - 3px),#fff calc(20% - 3px) 20%)}
+/* barra de 5 segmentos */
+.tools.v2 .track.seg{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;height:8px;background:none;border-radius:0;overflow:visible}
+.tools.v2 .track.seg::after{display:none}
+.tools.v2 .track.seg i{display:block;height:100%;border-radius:99px;background:#ececf3;position:relative;overflow:hidden}
+.tools.v2 .track.seg i::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,#5c5bff,var(--blue));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.22,1,.36,1) calc(var(--d,0s) + var(--j) * .12s)}
+.tools.v2 .track.seg i.on::before{transform:scaleX(1)}
+.js .tools.v2 .tool:not(.in) .track.seg i.on::before{transform:scaleX(0)}
+@media (prefers-reduced-motion:reduce){.tools.v2 .track.seg i::before{transition:none}.js .tools.v2 .tool:not(.in) .track.seg i.on::before{transform:scaleX(1)}}
