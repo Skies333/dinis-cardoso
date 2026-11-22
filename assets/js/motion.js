@@ -75,8 +75,6 @@
   addEventListener('scroll', function () {
     var y = scrollY, d = y - lastY;
     vel += d * 0.12;
-    if (nav) nav.classList.toggle('hide', d > 4 && y > 220);
-    if (nav && d < -4) nav.classList.remove('hide');
     var max = document.documentElement.scrollHeight - innerHeight, pr = max > 0 ? y / max : 0;
     tt.classList.toggle('show', pr > 0.55 && y > 700);
     if (ring) ring.style.strokeDashoffset = (157 * (1 - pr)).toFixed(1);

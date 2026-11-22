@@ -1607,3 +1607,4 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
   .js .nav,.js .lang-toggle,.js .badge,.hero h1 em,.pin{animation:none!important}
   .js .svc .ic,.js .card .media,.js .card .tags .chip,.js .cv-chips .chip,.js .cv-tools .cv-tool{opacity:1!important;transform:none!important;clip-path:none!important}
 }
+.nav.hide{transform:translateX(-50%)!important;opacity:1!important}
