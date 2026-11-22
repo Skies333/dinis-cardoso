@@ -1618,3 +1618,41 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 .form.sent .form-note{color:#17a34a}
 .form.error .form-note{color:#d43c3c}
 .form.error .form-note a{color:inherit;text-decoration:underline}
+
+/* =========================================================
+   Project facts strip
+   ========================================================= */
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,1.5fr);gap:10px;margin:clamp(28px,3.5vw,44px) 0 0}
+.fx{display:flex;flex-direction:column;gap:6px;padding:18px;border-radius:20px;background:#fff;border:1px solid var(--line);margin:0}
+.fx-ic{display:grid;place-items:center;width:34px;height:34px;margin-bottom:6px;border-radius:10px;background:var(--soft);color:var(--blue)}
+.fx-ic svg{width:17px;height:17px}
+.fx dt{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.fx dd{margin:0;font-family:var(--display);font-size:15.5px;font-weight:600;line-height:1.35;color:var(--ink);letter-spacing:-.01em}
+.fx-res{background:var(--blue);border-color:var(--blue)}
+.fx-res .fx-ic{background:rgba(255,255,255,.16);color:#fff}
+.fx-res dt{color:rgba(255,255,255,.7)}.fx-res dd{color:#fff;font-size:16.5px}
+@media (max-width:1000px){.facts{grid-template-columns:repeat(2,1fr)}.fx-res{grid-column:1/-1}}
+
+/* =========================================================
+   Beyond design
+   ========================================================= */
+.life-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:clamp(12px,1.4vw,18px)}
+.lf-photo{grid-row:span 2;position:relative;margin:0;border-radius:var(--r-xl,28px);overflow:hidden;min-height:440px;background:#111}
+.lf-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;transition:transform 1.2s var(--ease)}
+.lf-photo:hover img{transform:scale(1.04)}
+.lf-photo figcaption{position:absolute;left:16px;right:16px;bottom:16px;padding:16px 18px;border-radius:20px;background:rgba(255,255,255,.14);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);border:1px solid rgba(255,255,255,.2);color:#fff}
+.lf-photo figcaption b{display:block;font-family:var(--display);font-size:20px;font-weight:600}
+.lf-photo figcaption span{display:block;margin-top:4px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.82)}
+.lf-card{display:flex;flex-direction:column;padding:24px;border-radius:var(--r-xl,28px);background:#fff;border:1px solid var(--line);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.lf-card:hover{transform:translateY(-3px);box-shadow:0 22px 40px -30px rgba(42,41,255,.5)}
+.lf-card h3{margin-top:auto;padding-top:22px;font-size:21px;letter-spacing:-.02em}
+.lf-card p{margin-top:8px;font-size:14.5px;line-height:1.6;color:var(--muted)}
+.lf-ic{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;background:var(--soft);color:var(--blue)}
+.lf-ic svg{width:23px;height:23px}
+.lf-card:hover .lf-ic svg{animation:wiggle .6s ease}
+.lf-blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.lf-blue .lf-ic{background:rgba(255,255,255,.16);color:#fff}
+.lf-blue p{color:rgba(255,255,255,.8)}
+.life-grid .lf-card:last-child{grid-column:2/4}
+@media (max-width:900px){.life-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.lf-photo{grid-column:1/-1;grid-row:auto;min-height:360px}.life-grid .lf-card:last-child{grid-column:1/-1}}
+@media (max-width:560px){.life-grid{grid-template-columns:1fr}}
