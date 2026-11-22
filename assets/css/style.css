@@ -1608,3 +1608,13 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
   .js .svc .ic,.js .card .media,.js .card .tags .chip,.js .cv-chips .chip,.js .cv-tools .cv-tool{opacity:1!important;transform:none!important;clip-path:none!important}
 }
 .nav.hide{transform:translateX(-50%)!important;opacity:1!important}
+/* contact form states */
+.form .btn[disabled]{cursor:default}
+.form.sending .btn{opacity:.8}
+.form.sending .btn::before{content:"";display:inline-block;width:14px;height:14px;margin-right:8px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:spin .8s linear infinite;vertical-align:-2px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.form.sent .btn{background:#17a34a;border-color:#17a34a}
+.form-note{min-height:1.2em;margin-top:10px;font-size:14px;color:var(--muted)}
+.form.sent .form-note{color:#17a34a}
+.form.error .form-note{color:#d43c3c}
+.form.error .form-note a{color:inherit;text-decoration:underline}

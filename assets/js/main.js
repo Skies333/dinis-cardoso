@@ -65,20 +65,34 @@
     Object.keys(map).concat(['top', 'services', 'contact', 'work']).forEach(function (id) { var s = document.getElementById(id); if (s) so.observe(s); });
   }
 
-  // Contact form: static hosting has no backend, so compose an email instead
+  // Contact form: send through Formspree (AJAX), mailto link as fallback
   var form = document.querySelector('form[data-mailto]');
   if (form) {
+    var btn = form.querySelector('button[type=submit]'), note = form.querySelector('.form-note');
+    var label = btn ? btn.textContent : '';
+    var T = PT ? { sending: 'A enviar…', ok: 'Mensagem enviada!', okNote: 'Obrigado! Respondo-te o mais rápido possível.', err: 'Não foi possível enviar. Tenta de novo ou escreve para ' }
+               : { sending: 'Sending…', ok: 'Message sent!', okNote: 'Thank you! I’ll get back to you as soon as possible.', err: 'Could not send. Try again or write to ' };
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
-      var to = form.getAttribute('data-mailto');
-      var name = form.elements.name.value.trim();
-      var email = form.elements.email.value.trim();
-      var msg = form.elements.message.value.trim();
-      var subject = (PT ? 'Contacto pelo portfólio' : 'Portfolio contact') + (name ? ' — ' + name : '');
-      var body = msg + '\n\n— ' + name + (email ? ' (' + email + ')' : '');
-      window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      var note = form.querySelector('.form-note');
-      if (note) note.textContent = PT ? 'A abrir a tua app de email…' : 'Opening your email app…';
+      if (form.classList.contains('sending')) return;
+      form.classList.remove('sent', 'error'); form.classList.add('sending');
+      if (btn) { btn.disabled = true; btn.textContent = T.sending; }
+      if (note) note.textContent = '';
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+        .then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); })
+        .then(function () {
+          form.classList.remove('sending'); form.classList.add('sent');
+          if (btn) btn.textContent = T.ok;
+          if (note) note.textContent = T.okNote;
+          form.reset();
+          setTimeout(function () { form.classList.remove('sent'); if (btn) { btn.disabled = false; btn.textContent = label; } }, 5000);
+        })
+        .catch(function () {
+          form.classList.remove('sending'); form.classList.add('error');
+          if (btn) { btn.disabled = false; btn.textContent = label; }
+          var to = form.getAttribute('data-mailto');
+          if (note) { note.textContent = T.err; var a = document.createElement('a'); a.href = 'mailto:' + to; a.textContent = to; note.appendChild(a); }
+        });
     });
   }
 
