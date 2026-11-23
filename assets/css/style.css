@@ -1668,3 +1668,4 @@ html{scrollbar-color:rgba(0,0,0,.16) #fff}
 @media (prefers-reduced-motion:reduce){.tools.v2 .track.seg i::before{transition:none}.js .tools.v2 .tool:not(.in) .track.seg i.on::before{transform:scaleX(1)}}
 .footer a.brand,.footer a.brand:hover{background:none}
 .result .no b{background:var(--blue);color:#fff}
+.postit-blue .smile path{stroke:#fff}
